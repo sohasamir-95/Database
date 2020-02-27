@@ -21,7 +21,7 @@ and
 @dept_name=Dept_Name
 END
 DELETE_Dept 5,'Digital Marketing'
---------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
 --sp for Select statment
 CREATE PROC SELECT_Dept
 @dept_id int 
@@ -32,6 +32,17 @@ inner join Student as s
 on d.Dept_Id=s.Dept_Id
 where d.Dept_Id=@dept_id
 SELECT_Dept 1
+-----------------------------------------------------------------------------------
+Alter proc Count_student 
+@dept_id int 
+as
+select d.Dept_Name, count(s.Std_Name) as  Numofstudent
+from Student as s
+join Department as d
+on s.Dept_Id=d.Dept_Id
+where d.Dept_Id=@dept_id
+group by(d.Dept_Name)
+ Count_student 1 
 ------------------------------------------------------------------------------------
 --sp for Update statment
 CREATE PROC UPDATE_Dept
@@ -76,7 +87,18 @@ on e.Exam_Id=EQ.Exam_Id
 where e.Exam_Id=@exam_id
 
 SELECT_EQ 3
-
+----------------------------------------------------------------
+--sp for Delete examQues
+-----------------------------------------------------------------
+---sp num1 report
+CREATE PROC SELECT_Dept
+@dept_id int 
+as 
+select d.Dept_Name,s.Std_Name 
+from Department  as d
+inner join Student as s
+on d.Dept_Id=s.Dept_Id
+where d.Dept_Id=@dept_id
 -----------------------------------------------------------------
 ---sp num3 report
 create proc GetCoursesName
